@@ -1,0 +1,19 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "woia-sales-pipeline",
+  "version": "0.5.0",
+  "description": "WOIA Sales provider for bounded pipeline state reads/updates using shared customer data, explicit stage-transition rules, stale-write protection, effect evidence, and recovery discipline.",
+  "author": {
+    "name": "Turpial AI Academy",
+    "url": "https://github.com/Turpial-AI-Academy"
+  },
+  "homepage": "https://github.com/Turpial-AI-Academy/woia-sales-pipeline-agent-plugin",
+  "repository": "https://github.com/Turpial-AI-Academy/woia-sales-pipeline-agent-plugin",
+  "license": "MIT",
+  "keywords": [
+    "agent-plugin",
+    "woia",
+    "sales",
+    "sales-pipeline"
+  ]
+}

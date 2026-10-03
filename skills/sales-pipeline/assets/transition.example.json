@@ -1,0 +1,19 @@
+{
+  "current": "new",
+  "target": "qualified",
+  "allowed_transitions": {
+    "new": [
+      "qualified",
+      "disqualified"
+    ],
+    "qualified": [
+      "contacted",
+      "disqualified"
+    ],
+    "contacted": [
+      "proposal",
+      "nurture",
+      "disqualified"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+import { readFile } from "node:fs/promises";
+const i=process.argv.indexOf("--file"); if(i<0||!process.argv[i+1]) throw new Error("--file is required");
+const t=JSON.parse(await readFile(process.argv[i+1],"utf8"));
+const errors=[];
+if(typeof t.current!=="string"||!t.current) errors.push("current is required");
+if(typeof t.target!=="string"||!t.target) errors.push("target is required");
+if(!t.allowed_transitions||typeof t.allowed_transitions!=="object"||Array.isArray(t.allowed_transitions)) errors.push("allowed_transitions must be an object");
+const allowed=Array.isArray(t.allowed_transitions?.[t.current])?t.allowed_transitions[t.current]:[];
+const permitted=errors.length===0&&allowed.includes(t.target);
+console.log(JSON.stringify({result:errors.length?"FAIL":"PASS",current:t.current??null,target:t.target??null,allowed_from_current:allowed,permitted,errors},null,2));
+process.exitCode=errors.length?2:0;
