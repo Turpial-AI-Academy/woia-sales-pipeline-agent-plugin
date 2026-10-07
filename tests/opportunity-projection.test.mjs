@@ -62,6 +62,8 @@ const negatives = {
   domain_fact_mutation: f => { f.request.domain_facts = { lease: 'active' }; },
   customer_mutation: f => { f.request.customer_patch = { stage: 'won' }; },
   field_not_accepted: f => { f.context.authority.fields = []; },
+  malformed_field_allowlist: f => { f.context.authority.fields = 'stage'; },
+  malformed_evidence_allowlist: f => { f.context.accepted_evidence_refs = 'decision-evidence'; },
   inferred_evidence: f => { f.request.evidence_refs = ['model-inference']; },
   no_evidence: f => { f.request.evidence_refs = []; },
   unknown_effect: f => { f.context.effect_status = 'UNKNOWN'; },

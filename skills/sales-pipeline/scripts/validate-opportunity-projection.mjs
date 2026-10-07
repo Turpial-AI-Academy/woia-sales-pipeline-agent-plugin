@@ -35,17 +35,17 @@ export function validateOpportunityProjection(request, context) {
   require(context.effect_status === 'NONE' || context.effect_status === 'RECONCILED', 'RECONCILE_BEFORE_RETRY');
   if (plain(patch)) {
     require(Object.values(patch).every(text), 'NONEMPTY_PATCH_VALUES_REQUIRED');
-    require(Object.keys(patch).every((key) => context.authority?.fields?.includes(key)), 'FIELD_AUTHORITY_REQUIRED');
+    require(Array.isArray(context.authority?.fields) && Object.keys(patch).every((key) => context.authority.fields.includes(key)), 'FIELD_AUTHORITY_REQUIRED');
     if ('stage' in patch) {
       const allowed = context.transition_policy?.allowed_transitions?.[current?.stage];
       require(context.transition_policy?.accepted === true && text(context.transition_policy?.version), 'ACCEPTED_TRANSITION_POLICY_REQUIRED');
       require(Array.isArray(allowed) && allowed.includes(patch.stage), 'TRANSITION_NOT_ALLOWED');
     }
-    if ('owner_ref' in patch) require(context.authorized_owner_refs?.includes(patch.owner_ref), 'OWNER_SCOPE_MISMATCH');
-    if ('status' in patch) require(context.allowed_statuses?.includes(patch.status), 'STATUS_NOT_ALLOWED');
-    if ('next_action' in patch) require(context.allowed_next_actions?.includes(patch.next_action), 'NEXT_ACTION_NOT_ALLOWED');
+    if ('owner_ref' in patch) require(Array.isArray(context.authorized_owner_refs) && context.authorized_owner_refs.includes(patch.owner_ref), 'OWNER_SCOPE_MISMATCH');
+    if ('status' in patch) require(Array.isArray(context.allowed_statuses) && context.allowed_statuses.includes(patch.status), 'STATUS_NOT_ALLOWED');
+    if ('next_action' in patch) require(Array.isArray(context.allowed_next_actions) && context.allowed_next_actions.includes(patch.next_action), 'NEXT_ACTION_NOT_ALLOWED');
   }
-  require(Array.isArray(request.evidence_refs) && request.evidence_refs.length > 0 && request.evidence_refs.every((ref) => text(ref) && context.accepted_evidence_refs?.includes(ref)), 'ACCEPTED_EVIDENCE_REQUIRED');
+  require(Array.isArray(request.evidence_refs) && request.evidence_refs.length > 0 && Array.isArray(context.accepted_evidence_refs) && request.evidence_refs.every((ref) => text(ref) && context.accepted_evidence_refs.includes(ref)), 'ACCEPTED_EVIDENCE_REQUIRED');
   require(!request.domain_facts && !request.customer_patch, 'DOMAIN_FACT_MUTATION_FORBIDDEN');
   if (errors.length) return { result: 'FAIL', permitted: false, errors };
   const projection = { ...structuredClone(current), ...patch };
