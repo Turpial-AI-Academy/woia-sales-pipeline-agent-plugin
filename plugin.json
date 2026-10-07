@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "woia-sales-pipeline",
-  "version": "0.5.0",
-  "description": "WOIA Sales provider for bounded pipeline state reads/updates using shared customer data, explicit stage-transition rules, stale-write protection, effect evidence, and recovery discipline.",
+  "version": "0.5.1",
+  "description": "WOIA provider for typed Opportunity pipeline projections with explicit accepted transitions, scoped evidence and source authority; compatible generic transition validation.",
   "author": {
     "name": "Turpial AI Academy",
     "url": "https://github.com/Turpial-AI-Academy"
