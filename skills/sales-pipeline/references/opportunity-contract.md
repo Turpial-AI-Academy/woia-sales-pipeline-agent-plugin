@@ -43,5 +43,3 @@ effects before any retry. No durable idempotency or runtime enforcement is claim
 The existing validate-transition CLI and its JSON input/output remain compatible:
 it validates a supplied graph only, not authenticated write permission. Use the
 typed helper for the Opportunity proposal boundary.
-
-the coordination repository is authoring provenance, not a runtime dependency.
