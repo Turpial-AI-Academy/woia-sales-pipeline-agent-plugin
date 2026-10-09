@@ -4,7 +4,7 @@ description: Read, plan, propose or audit typed Opportunity pipeline state with 
 license: MIT
 metadata:
   author: Turpial AI Academy
-  version: "0.5.1"
+  version: "0.5.6"
 ---
 
 # Sales Pipeline
@@ -20,7 +20,7 @@ Resolve Opportunity through the accepted Source Authority Map and identity throu
 1. Resolve exact organization/Opportunity ref and current accepted source-of-truth state/revision. UNKNOWN/stale source fails closed.
 2. Determine the intended bounded change: stage, owner, status, next action or other authorized Sales field.
 3. Check organization/Project stage-transition rules when present.
-4. For W3 typed proposals, use scripts/validate-opportunity-projection.mjs with authenticated host-resolved current context and exact competent acceptance. The legacy validate-transition helper remains graph-only compatible.
+4. For typed proposals, use scripts/validate-opportunity-projection.mjs with authenticated host-resolved current context and exact competent acceptance. The legacy validate-transition helper remains graph-only compatible.
 5. Confirm effective authority.
 6. Only the owning configured source adapter may apply a validated proposal, with mandatory atomic revision CAS, durable exact-request idempotency and immutable evidence. This plugin does not perform that write.
 7. Confirm resulting source state. If effect outcome is unknown, reconcile before retry.

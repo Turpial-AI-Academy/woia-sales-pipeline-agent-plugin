@@ -42,7 +42,7 @@ effects before any retry. No durable idempotency or runtime enforcement is claim
 
 The existing validate-transition CLI and its JSON input/output remain compatible:
 it validates a supplied graph only, not authenticated write permission. Use the
-typed helper for the W3 Opportunity proposal boundary.
+typed helper for the Opportunity proposal boundary.
 
 Derived from accepted docs/21, docs/22 and docs/24 in WOIA Real Estate B5/B6;
 the coordination repository is authoring provenance, not a runtime dependency.

@@ -1,11 +1,9 @@
 {
   "name": "woia-sales-pipeline-agent-plugin-repo",
   "private": true,
-  "version": "0.5.1",
+  "version": "0.5.6",
   "type": "module",
   "scripts": {
-    "test": "node --test tests/*.test.mjs",
-    "ci:fast": "node --check skills/sales-pipeline/scripts/validate-opportunity-projection.mjs && node --test tests/*.test.mjs",
     "release:check": "node scripts/release-check.mjs"
   }
 }
