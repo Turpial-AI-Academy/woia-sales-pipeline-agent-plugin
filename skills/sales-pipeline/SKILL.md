@@ -4,7 +4,7 @@ description: Read, plan, propose or audit typed Opportunity pipeline state with 
 license: MIT
 metadata:
   author: Turpial AI Academy
-  version: "0.5.6"
+  version: "0.5.7"
 ---
 
 # Sales Pipeline

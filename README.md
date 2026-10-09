@@ -1,6 +1,6 @@
 # woia-sales-pipeline
 
-WOIA Sales v0.5.6 provider for `sales.pipeline`.
+WOIA Sales v0.5.7 provider for `sales.pipeline`.
 
 - Primary skill: `$sales-pipeline`
 - Authoring profile: thin

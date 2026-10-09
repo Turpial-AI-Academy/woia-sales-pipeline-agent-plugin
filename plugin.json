@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "woia-sales-pipeline",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "WOIA provider for typed Opportunity pipeline projections with explicit accepted transitions, scoped evidence and source authority; compatible generic transition validation.",
   "author": {
     "name": "Turpial AI Academy",
