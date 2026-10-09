@@ -2,8 +2,5 @@
   "name": "woia-sales-pipeline-agent-plugin-repo",
   "private": true,
   "version": "0.5.6",
-  "type": "module",
-  "scripts": {
-    "release:check": "node scripts/release-check.mjs"
-  }
+  "type": "module"
 }
