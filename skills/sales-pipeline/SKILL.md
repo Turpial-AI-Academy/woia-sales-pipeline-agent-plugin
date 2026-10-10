@@ -1,10 +1,10 @@
 ---
 name: sales-pipeline
-description: Read, plan, propose or audit typed Opportunity pipeline state with accepted source authority, scoped transitions and evidence; preserve the compatible graph-only validator.
+description: Read, plan, propose or audit typed commercial-intent pipeline state with accepted source authority, admitted domain references, scoped transitions and evidence.
 license: MIT
 metadata:
   author: Turpial AI Academy
-  version: "0.5.7"
+  version: "0.5.8"
 ---
 
 # Sales Pipeline
@@ -13,14 +13,14 @@ Use for scoped Sales, Leasing, Supply Acquisition and Executive Opportunity/pipe
 
 ## Shared source
 
-Resolve Opportunity through the accepted Source Authority Map and identity through woia-identity. Customer Data is an optional organization CRM adapter, never the canonical cross-role identity or Opportunity master. Preserve separately owned Negotiation/Offer/Reservation/Lease/SaleTransaction/Payment references.
+Resolve Opportunity through the accepted Source Authority Map and identity through woia-identity. Customer Data is an optional organization CRM adapter. Preserve separately owned typed `domain_refs`; their definitions and owners come from the admitted host descriptor.
 
 ## Update workflow
 
 1. Resolve exact organization/Opportunity ref and current accepted source-of-truth state/revision. UNKNOWN/stale source fails closed.
 2. Determine the intended bounded change: stage, owner, status, next action or other authorized Sales field.
 3. Check organization/Project stage-transition rules when present.
-4. For typed proposals, use scripts/validate-opportunity-projection.mjs with authenticated host-resolved current context and exact competent acceptance. The legacy validate-transition helper remains graph-only compatible.
+4. For typed proposals, use scripts/validate-opportunity-projection.mjs with authenticated host-resolved current context, an admitted descriptor for domain links and exact competent acceptance. The validate-transition helper checks a supplied graph only.
 5. Confirm effective authority.
 6. Only the owning configured source adapter may apply a validated proposal, with mandatory atomic revision CAS, durable exact-request idempotency and immutable evidence. This plugin does not perform that write.
 7. Confirm resulting source state. If effect outcome is unknown, reconcile before retry.
@@ -38,4 +38,4 @@ Reads are read effects. Pipeline changes are external-write effects and require 
 
 ## Typed Opportunity boundary
 
-Read [the Opportunity contract](references/opportunity-contract.md). A won stage is not closing, signature, lease activation, payment or possession. This provider does not mutate those facts, dispatch communication or accept financial consequences. Never supply untrusted caller/model claims as authenticated context. The validator is an offline proposal check, not a runtime authority grant.
+Read [the Opportunity contract](references/opportunity-contract.md). A pipeline stage does not accept a separately owned business outcome. This provider preserves those references, dispatches no communication and grants no financial consequence. Never supply untrusted caller/model claims as authenticated context. The validator is an offline proposal check; the source owner enforces revision CAS, durable idempotency and effect reconciliation.

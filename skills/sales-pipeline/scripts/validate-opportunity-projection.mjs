@@ -33,6 +33,21 @@ export function validateOpportunityProjection(request, context) {
   require(plain(patch) && Object.keys(patch).length > 0, 'BOUNDED_PATCH_REQUIRED');
   require(plain(patch) && Object.keys(patch).every((key) => mutableFields.includes(key)), 'DOMAIN_FACT_OR_UNKNOWN_FIELD');
   require(context.effect_status === 'NONE' || context.effect_status === 'RECONCILED', 'RECONCILE_BEFORE_RETRY');
+  require(plain(current?.domain_refs), 'TYPED_DOMAIN_REFERENCES_REQUIRED');
+  if (plain(current?.domain_refs) && Object.keys(current.domain_refs).length > 0) {
+    const descriptor = context.domain_descriptor;
+    require(descriptor?.accepted === true && descriptor.current === true && text(descriptor.ref) && text(descriptor.version) && text(descriptor.acceptance_ref), 'ADMITTED_DOMAIN_DESCRIPTOR_REQUIRED');
+    require(descriptor?.entity === 'Opportunity' && descriptor.org_id === request.org_id && descriptor.scope === 'sales.pipeline', 'DOMAIN_DESCRIPTOR_SCOPE_MISMATCH');
+    require(Array.isArray(descriptor?.domain_refs) && descriptor.domain_refs.every(value => plain(value) && text(value.field) && text(value.entity) && text(value.owner_plugin) && typeof value.required === 'boolean') && new Set(descriptor.domain_refs.map(value => value.field)).size === descriptor.domain_refs.length, 'INVALID_DOMAIN_DESCRIPTOR');
+    if (Array.isArray(descriptor?.domain_refs) && descriptor.domain_refs.every(plain)) {
+      for (const [field, reference] of Object.entries(current.domain_refs)) {
+        const definition = descriptor.domain_refs.find(value => value.field === field);
+        require(Boolean(definition), 'UNKNOWN_DOMAIN_REFERENCE');
+        require(plain(reference) && reference.kind === definition?.entity && text(reference.id) && text(reference.source_ref) && text(reference.revision), 'DOMAIN_REFERENCE_TYPE_OR_SOURCE_MISMATCH');
+      }
+      require(descriptor.domain_refs.every(value => !value.required || Object.hasOwn(current.domain_refs, value.field)), 'REQUIRED_DOMAIN_REFERENCE_MISSING');
+    }
+  }
   if (plain(patch)) {
     require(Object.values(patch).every(text), 'NONEMPTY_PATCH_VALUES_REQUIRED');
     require(Array.isArray(context.authority?.fields) && Object.keys(patch).every((key) => context.authority.fields.includes(key)), 'FIELD_AUTHORITY_REQUIRED');
